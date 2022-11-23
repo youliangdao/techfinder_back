@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgresql-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  api:
+    build:
+      context: ../stack_db_api
+      dockerfile: ../docker/ruby/Dockerfile
+    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    image: rails:dev
+    volumes:
+      - ${APP_CODE_PATH_HOST}:/var/www
+      - ${APP_CODE_PATH_HOST}/vendor/bundle:/var/www/vendor/bundle
+    environment:
+      TZ: Asia/Tokyo
+      RAILS_ENV: development
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - ${APP_PORT}:3000
+    tty: true
+    stdin_open: true
+    depends_on:
+      - db
+
+volumes:
+  postgresql-data:

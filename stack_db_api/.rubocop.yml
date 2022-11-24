@@ -1,0 +1,37 @@
+# .rubocop.yml
+
+inherit_from: .rubocop_todo.yml
+
+inherit_mode:
+  merge:
+    - Exclude
+
+require:
+  - rubocop-performance
+  - rubocop-rubycw
+  - rubocop-rails
+  - rubocop-rspec
+
+AllCops:
+  DisabledByDefault: true
+  Exclude:
+    - "gems/**/*"
+  NewCops: enable
+
+Bundler:
+  Enabled: true
+
+Gemspec:
+  Enabled: true
+
+Lint:
+  Enabled: true
+
+Performance:
+  Enabled: true
+
+Rubycw:
+  Enabled: true
+
+Security:
+  Enabled: true

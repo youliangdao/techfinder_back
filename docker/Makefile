@@ -7,8 +7,14 @@ bundle-update:
 db-migrate:
 	docker-compose run --rm api bundle exec rails db:migrate RAILS_ENV=development
 
-test:
-	docker-compose run --rm api bundle exec rails test
+seed_fu:
+	docker-compose run --rm api bundel exec rails db:seed_fu
+
+rubocop:
+	docker-compose run --rm api bundle exec rubocop -a
+
+rspec:
+	docker-compose run --rm api bundle exec rspec
 
 build:
 	docker-compose build

@@ -1,0 +1,7 @@
+test:
+  adapter: postgres
+  encoding: unicode
+  username: postgres
+  password: password
+  host: 127.0.0.1
+  database: www_test

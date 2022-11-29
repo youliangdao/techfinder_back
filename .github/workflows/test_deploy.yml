@@ -36,7 +36,7 @@ jobs:
       - name: Database create and migrate
         working-directory: ./stack_db_api
         run: |
-          cp stack_db_api/config/database.yml.ci stack_db_api/config/database.yml
+          cp config/database.yml.ci config/database.yml
           bundle exec rails db:create RAILS_ENV=test
           bundle exec rails db:migrate RAILS_ENV=test
 
@@ -55,7 +55,6 @@ jobs:
       - name: Run bundle install
         working-directory: ./stack_db_api
         run: |
-          bundle config --local path /vendor/bundle
           bundle config --local without production
           bundle install
       - name: Run Rubocop

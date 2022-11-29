@@ -1,0 +1,62 @@
+name: Test and Deploy
+
+on:
+  pull_request:
+
+jobs:
+  rspec:
+    name: RSpec
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: www_test
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports:
+          - 5432:5432
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.0.4"
+      - name: Run bundle install
+        working-directory: ./stack_db_api
+        run: |
+          bundle config --local without production
+          bundle install
+      - name: Database create and migrate
+        working-directory: ./stack_db_api
+        run: |
+          cp config/database.yml.ci config/database.yml
+          bundle exec rails db:create RAILS_ENV=test
+          bundle exec rails db:migrate RAILS_ENV=test
+
+      - name: Run RSpec
+        working-directory: ./stack_db_api
+        run: bundle exec rspec
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.0.4"
+      - name: Run bundle install
+        working-directory: ./stack_db_api
+        run: |
+          bundle config --local without production
+          bundle install
+      - name: Run Rubocop
+        working-directory: ./stack_db_api
+        run: bundle exec rubocop -a

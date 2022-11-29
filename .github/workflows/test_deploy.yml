@@ -24,41 +24,41 @@ jobs:
           - 5432:5432
     steps:
       - uses: actions/checkout@v3
-        with:
-          repository: youliangdao/stack_db_back/stack_db_api
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.0.4"
       - name: Run bundle install
+        working-directory: ./stack_db_api
         run: |
           bundle config --local path /vendor/bundle
           bundle config --local without production
           bundle install
       - name: Database create and migrate
+        working-directory: ./stack_db_api
         run: |
           cp stack_db_api/config/database.yml.ci stack_db_api/config/database.yml
           bundle exec rails db:create RAILS_ENV=test
           bundle exec rails db:migrate RAILS_ENV=test
 
       - name: Run RSpec
+        working-directory: ./stack_db_api
         run: bundle exec rspec
-
   lint:
     name: Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          repository: youliangdao/stack_db_back/stack_db_api
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.0.4"
       - name: Run bundle install
+        working-directory: ./stack_db_api
         run: |
           bundle config --local path /vendor/bundle
           bundle config --local without production
           bundle install
       - name: Run Rubocop
+        working-directory: ./stack_db_api
         run: bundle exec rubocop -a

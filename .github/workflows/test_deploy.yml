@@ -28,9 +28,15 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.0.4"
+      - name: Cache bundle
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: bundle-v1-${{ hashFiles('Gemfile.lock') }}
       - name: Run bundle install
         working-directory: ./stack_db_api
         run: |
+          bundle config --local path vendor/bundle
           bundle config --local without production
           bundle install
       - name: Database create and migrate
@@ -52,9 +58,15 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.0.4"
+      - name: Cache bundle
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: bundle-v1-${{ hashFiles('Gemfile.lock') }}
       - name: Run bundle install
         working-directory: ./stack_db_api
         run: |
+          bundle config --local path vendor/bundle
           bundle config --local without production
           bundle install
       - name: Run Rubocop

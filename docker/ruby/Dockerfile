@@ -11,6 +11,11 @@ RUN mkdir $APP_ROOT
 # 作成したディレクトリをワークディレクトリとして設定
 WORKDIR $APP_ROOT
 
+ENV BUNDLE_JOBS=4 \
+    BUNDLE_RETRY=3 \
+    BUNDLE_PATH=vendor/bundle \
+    BUNDLE_APP_CONFIG=$APP_ROOT/.bundle
+
 # アプリディレクトリ配下のGemfileをコンテナ内のRailsアプリの配置場所にコピー
 COPY Gemfile ${APP_ROOT}/Gemfile
 # Gemfile.lockも同様にコンテナ内にコピーする

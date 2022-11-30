@@ -1,12 +1,8 @@
 name: Deploy to Heroku
 on:
-  workflow_run:
-    workflows:
-      - "Develop Check"
+  push:
     branches:
       - master
-    types:
-      - completed
 
 jobs:
   build:

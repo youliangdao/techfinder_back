@@ -1,5 +1,4 @@
 name: Deploy to Heroku
-
 on:
   workflow_run:
     workflows:

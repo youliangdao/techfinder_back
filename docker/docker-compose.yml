@@ -23,7 +23,7 @@ services:
     environment:
       TZ: Asia/Tokyo
       RAILS_ENV: development
-      DATABASE_PASSWORD: ${POSTGRES_PASSWORD}
+      APP_DATABASE_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - ${APP_PORT}:3000
     tty: true

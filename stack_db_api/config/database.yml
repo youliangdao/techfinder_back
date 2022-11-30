@@ -21,7 +21,7 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: postgres
-  password: <%= ENV.fetch("DATABASE_PASSWORD") %>
+  password: <%= ENV.fetch("APP_DATABASE_PASSWORD") %>
   host: db
 
 development:
@@ -83,7 +83,7 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  <<: *default
-  database: www_production
-  username: www
-  password: <%= ENV['WWW_DATABASE_PASSWORD'] %>
+  database: <%= ENV['APP_DATABASE'] %>
+  username: <%= ENV['APP_DATABASE_USERNAME'] %>
+  password: <%= ENV['APP_DATABASE_PASSWORD'] %>
+  host: <%= ENV['APP_DATABASE_HOST'] %>

@@ -1,0 +1,24 @@
+name: Deploy to Heroku
+
+on:
+  workflow_run:
+    workflows:
+      - "Develop Check"
+    branches:
+      - master
+    types:
+      - completed
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Deploy
+        uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "stack-db-back"
+          heroku_email: "youliangdaojing5@gmail.com"
+          appdir: "stack_db_api"
+          usedocker: true

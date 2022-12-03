@@ -121,4 +121,5 @@
 
 # ER 図
 
-[ER 図](https://drive.google.com/file/d/1rSYAT-ujkbC7MtHTCqjiwxBv42R9recD/view?usp=sharing)
+- [テーブル設計詳細](https://gist.github.com/youliangdao/f1dfd8140407869385439da765b522e0)
+- [ER 図](https://drive.google.com/file/d/1tDxaxfbCYmUWam6YoM3rpfJ7PdLlUYl0/view?usp=sharing)

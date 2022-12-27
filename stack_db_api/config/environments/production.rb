@@ -1,7 +1,6 @@
 require "active_support/core_ext/integer/time"
 
 Rails.application.configure do
-  config.hosts << 'd1eank2u5cgu4a.cloudfront.net'  
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.

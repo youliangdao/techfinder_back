@@ -24,6 +24,7 @@ services:
       TZ: Asia/Tokyo
       RAILS_ENV: development
       APP_DATABASE_PASSWORD: ${POSTGRES_PASSWORD}
+      API_DOMAIN: "127.0.0.1:${FRONT_PORT}"
     ports:
       - ${APP_PORT}:3000
     tty: true

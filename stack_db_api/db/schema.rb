@@ -18,12 +18,13 @@ ActiveRecord::Schema.define(version: 2022_12_27_093046) do
   create_table "users", force: :cascade do |t|
     t.string "nickname", limit: 40, null: false
     t.text "description"
-    t.string "uid"
+    t.string "uid", null: false
     t.string "avatar_key"
     t.string "twitter_username"
     t.string "github_username"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["uid"], name: "index_users_on_uid", unique: true
   end
 
 end

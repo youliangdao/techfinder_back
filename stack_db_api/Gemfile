@@ -9,6 +9,8 @@ gem 'rails', '~> 6.1.6', '>= 6.1.6.1'
 gem 'bootsnap', '>= 1.4.4', require: false
 # cors
 gem 'rack-cors'
+# jwt
+gem 'jwt'
 
 group :development, :test do
   # デバッグ用

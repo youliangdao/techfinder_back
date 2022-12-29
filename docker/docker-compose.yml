@@ -25,6 +25,7 @@ services:
       RAILS_ENV: development
       APP_DATABASE_PASSWORD: ${POSTGRES_PASSWORD}
       API_DOMAIN: "127.0.0.1:${FRONT_PORT}"
+      FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID}
     ports:
       - ${APP_PORT}:3000
     tty: true

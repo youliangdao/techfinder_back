@@ -116,11 +116,10 @@ module FirebaseAuth
   # Googleの公開鍵はX.509にて作成されているのでそれに従って証明書を作成し、公開鍵を取得する。
   def get_public_key(header)
     certificate = find_certificate(header["kid"])
-    public_key = OpenSSL::X509::Certificate.new(certificate).public_key
+    _public_key = OpenSSL::X509::Certificate.new(certificate).public_key
   rescue OpenSSL::X509::CertificateError => e
     raise "Invalid certificate. #{e.message}"
   
-    return public_key
   end
 
   # 公開鍵が存在する証明書を探すためのkeyがkid
@@ -131,11 +130,11 @@ module FirebaseAuth
   # }  
   def find_certificate(kid)
     certificates = fetch_certificates
-    unless certificates.keys.include?(kid)
+    unless certificates.key?(kid)
       raise "Invalid 'kid', do not correspond to one of valid public keys."      
     end
 
-    valid_certificate = certificates[kid]
+    _valid_certificate = certificates[kid]
   end
 
   # CERT_URLから証明書リストを取得する
@@ -150,7 +149,7 @@ module FirebaseAuth
       raise "Error: can't obtain valid public key certificates from Google."
     end
 
-    certificates = JSON.parse(res.body)
+    _certificates = JSON.parse(res.body)
   end
 
   # 与えられたJWTトークンのフォーマットチェックと検証を行う

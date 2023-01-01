@@ -22,7 +22,6 @@ class User < ApplicationRecord
   validates :description, length: { maximum: 160 } 
 
   def self.find_or_create_user(user_info)
-
     user = User.find_by(uid: user_info[:uid])
     return user if user
 

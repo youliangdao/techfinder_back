@@ -26,7 +26,7 @@ module FirebaseAuth
   CERT_URI =
     "https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com".freeze
   
-  # 検証用のラッパーメソッドは以下のようなロジックで動かす:
+  # 検証用のラッパーメソッドは以下のようなロジックで動かす
   #   1. ヘッダーを取得するために、検証を行わずにトークンをデコード
   #   2. ヘッダから公開鍵の識別子を使用して、公開鍵を取得
   #   3. トークンのフォーマットチェック＋署名検証

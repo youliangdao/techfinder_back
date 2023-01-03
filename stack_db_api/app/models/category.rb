@@ -12,6 +12,7 @@
 # Indexes
 #
 #  index_categories_on_name  (name) UNIQUE
+#  index_categories_on_path  (path) UNIQUE
 #
 class Category < ApplicationRecord
   has_many :qiita_category_maps, dependent: :destroy

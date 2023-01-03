@@ -9,7 +9,7 @@
 #  title      :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  item_id    :string
+#  item_id    :string           not null
 #
 # Indexes
 #

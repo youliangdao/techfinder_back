@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_03_012700) do
+ActiveRecord::Schema.define(version: 2023_01_02_064757) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -18,10 +18,11 @@ ActiveRecord::Schema.define(version: 2023_01_03_012700) do
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
     t.string "image", null: false
+    t.string "path", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "path", null: false
     t.index ["name"], name: "index_categories_on_name", unique: true
+    t.index ["path"], name: "index_categories_on_path", unique: true
   end
 
   create_table "qiita_articles", force: :cascade do |t|
@@ -29,9 +30,9 @@ ActiveRecord::Schema.define(version: 2023_01_03_012700) do
     t.string "title", null: false
     t.string "date", null: false
     t.integer "stock", null: false
+    t.string "item_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "item_id"
     t.index ["item_id"], name: "index_qiita_articles_on_item_id", unique: true
     t.index ["link"], name: "index_qiita_articles_on_link", unique: true
   end

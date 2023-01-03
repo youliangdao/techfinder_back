@@ -10,7 +10,7 @@ class Api::V1::HelloController < ApplicationController
     #   item["tags"].map { |tag| tag["name"] }
     # end
 
-    qiita_items.each_with_index do |item, i|
+    qiita_items.each_with_index do |item, _i|
       array = []
       item["tags"].each do |tag|
         tag_name = tag["name"]

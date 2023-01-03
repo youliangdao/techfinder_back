@@ -11,6 +11,7 @@ qiita_items.each_with_index do |article, i|
     s.title = article["title"]
     s.date = article["created_at"]
     s.stock = article["stocks_count"]
+    s.item_id = article["id"]
   end
 
   array = []

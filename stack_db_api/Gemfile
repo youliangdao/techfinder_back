@@ -15,7 +15,9 @@ gem 'jwt'
 gem 'aws-sdk'
 # json_serializer
 gem 'jsonapi-serializer'
-
+# API連携
+gem 'faraday'
+gem 'faraday_middleware'
 
 group :development, :test do
   # デバッグ用

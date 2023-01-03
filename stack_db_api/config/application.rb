@@ -23,6 +23,7 @@ module Www
   class Application < Rails::Application
     config.load_defaults 6.1
     config.api_only = true
+    config.paths.add 'lib', eager_load: true
 
     # 言語・タイムゾーンを日本に設定
     config.i18n.default_locale = :ja

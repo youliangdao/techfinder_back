@@ -31,6 +31,7 @@ jobs:
           docker push registry.heroku.com/$APP_NAME/web
           heroku container:release web -a $APP_NAME
           heroku run bin/rails db:migrate RAILS_ENV=production -a $APP_NAME
+          heroku run bin/rails db:seed_fu
 
       - name: Slack Notification
         uses: 8398a7/action-slack@v3

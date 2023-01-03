@@ -5,9 +5,11 @@ class CreateQiitaArticles < ActiveRecord::Migration[6.1]
       t.string :title, null: false
       t.string :date,  null: false
       t.integer :stock, null: false
+      t.string :item_id, null: false
 
       t.timestamps
     end
     add_index :qiita_articles, [:link], unique: true
+    add_index :qiita_articles, [:item_id], unique: true
   end
 end

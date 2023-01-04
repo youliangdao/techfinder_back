@@ -18,7 +18,11 @@ qiita_items.each_with_index do |article, i|
   article["tags"].each do |tag|
     tag_name = tag["name"]
     categories = Category.arel_table
-    category = Category.where(categories[:name].matches("%#{tag_name}%"))
+    if tag_name == "Go"
+      category = Category.where(categories[:name].matches("#{tag_name}"))
+    else
+      category = Category.where(categories[:name].matches("%#{tag_name}%"))
+    end
     if category.length == 0
       array.push(64)
     else

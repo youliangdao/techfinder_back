@@ -15,14 +15,22 @@ class Api::V1::HelloController < ApplicationController
       item["tags"].each do |tag|
         tag_name = tag["name"]
         categories = Category.arel_table
-        category = Category.where(categories[:name].matches("%#{tag_name}%"))
+        if tag_name == "Go"
+          category = Category.where(categories[:name].matches("#{tag_name}"))
+        else
+          category = Category.where(categories[:name].matches("%#{tag_name}%"))
+        end
+
+
         if category.length == 0
           array.push(64)
         else
           array.push(category[0].id)
         end
       end
+
       array.uniq!
+
       if array.length > 1
         array.delete(64)
       end

@@ -18,6 +18,8 @@ gem 'jsonapi-serializer'
 # API連携
 gem 'faraday'
 gem 'faraday_middleware'
+# OGP画像取得
+gem 'link_thumbnailer'
 
 group :development, :test do
   # デバッグ用

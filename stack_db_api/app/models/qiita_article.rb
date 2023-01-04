@@ -20,6 +20,9 @@ class QiitaArticle < ApplicationRecord
   has_many :qiita_category_maps, dependent: :destroy
   has_many :categories, through: :qiita_category_maps, dependent: :destroy
 
+  scope :popular, -> { order(stock: :desc) }
+  scope :recent, -> { order(date: :desc) }
+
   validates :link,    presence: true, uniqueness: true
   validates :title,   presence: true
   validates :date,    presence: true

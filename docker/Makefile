@@ -16,6 +16,12 @@ rubocop:
 rspec:
 	docker-compose run --rm api bundle exec rspec
 
+routes:
+	docker-compose run --rm api bin/rails routes
+
+console:
+	docker-compose run --rm api bin/rails c
+	
 build:
 	docker-compose build
 

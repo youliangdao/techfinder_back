@@ -3,16 +3,16 @@ class Api::V1::ArticlesController < Api::V1::BaseController
 
   def index
     if params[:tab] == "popular"
-      qiita_articles = QiitaArticle.popular.limit(10)
+      qiita_articles = QiitaArticle.popular
     else
-      qiita_articles = QiitaArticle.limit(10)
+      qiita_articles = QiitaArticle.all
     end
     json_string = QiitaArticleSerializer.new(qiita_articles, options).serializable_hash.to_json
     render json: json_string
   end
 
   def rising
-    qiita_articles = QiitaArticle.where("stock > ?", 100).recent.limit(8)
+    qiita_articles = QiitaArticle.where("stock > ?", 100).recent.limit(10)
     json_string = QiitaArticleSerializer.new(qiita_articles, options).serializable_hash.to_json
     render json: json_string
   end

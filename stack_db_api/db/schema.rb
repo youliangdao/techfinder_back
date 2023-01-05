@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2023_01_02_064757) do
     t.string "date", null: false
     t.integer "stock", null: false
     t.string "item_id", null: false
+    t.string "image", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["item_id"], name: "index_qiita_articles_on_item_id", unique: true

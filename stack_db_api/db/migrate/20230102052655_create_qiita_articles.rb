@@ -6,6 +6,7 @@ class CreateQiitaArticles < ActiveRecord::Migration[6.1]
       t.string :date,  null: false
       t.integer :stock, null: false
       t.string :item_id, null: false
+      t.string :image, null: false
 
       t.timestamps
     end

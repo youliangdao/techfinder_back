@@ -5,6 +5,8 @@ qiita_items = []
 qiita_items.concat(qiita_items_page1, qiita_items_page2, qiita_items_page3)
 
 qiita_items.each_with_index do |article, i|
+  result = LinkThumbnailer.generate("#{article["url"]}")
+  image = result.images.first.src.to_s  
   QiitaArticle.seed do |s|
     s.id = i + 1
     s.link = article["url"]
@@ -12,6 +14,7 @@ qiita_items.each_with_index do |article, i|
     s.date = article["created_at"]
     s.stock = article["stocks_count"]
     s.item_id = article["id"]
+    s.image = image
   end
 
   array = []

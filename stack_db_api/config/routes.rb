@@ -4,12 +4,16 @@ Rails.application.routes.draw do
     namespace :v1 do
       # api test action
       resources :hello, only: %w[index]
+      
       resource :image, only: %w[create show]
       resource :authentication, only: %w[create]
       resource :profile, only: %w[show update]
       resources :articles, only: %w[index] do
         collection do
           get 'rising', to: 'articles#rising'
+          get 'bookmarks', to: 'articles#bookmarks'
+          get 'likes', to: 'articles#likes'
+          get 'bookmarks_and_likes', to: 'articles#bookmark_likes'
         end
       end
       scope '/:category_name' do
@@ -21,6 +25,8 @@ Rails.application.routes.draw do
         end
       end
       get 'categories/:category_name', to: 'categories#show'
+      resources :bookmarks, only: %w[create destroy]
+      resources :qiita_article_likes, only: %w[create destroy]
     end
   end  
 end

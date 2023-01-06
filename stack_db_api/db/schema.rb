@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_01_02_064757) do
+ActiveRecord::Schema.define(version: 2023_01_05_091527) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.bigint "qiita_article_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["qiita_article_id"], name: "index_bookmarks_on_qiita_article_id"
+    t.index ["user_id", "qiita_article_id"], name: "index_bookmarks_on_user_id_and_qiita_article_id", unique: true
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string "name", null: false
@@ -23,6 +33,16 @@ ActiveRecord::Schema.define(version: 2023_01_02_064757) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_categories_on_name", unique: true
     t.index ["path"], name: "index_categories_on_path", unique: true
+  end
+
+  create_table "qiita_article_likes", force: :cascade do |t|
+    t.bigint "qiita_article_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["qiita_article_id"], name: "index_qiita_article_likes_on_qiita_article_id"
+    t.index ["user_id", "qiita_article_id"], name: "index_qiita_article_likes_on_user_id_and_qiita_article_id", unique: true
+    t.index ["user_id"], name: "index_qiita_article_likes_on_user_id"
   end
 
   create_table "qiita_articles", force: :cascade do |t|
@@ -59,6 +79,10 @@ ActiveRecord::Schema.define(version: 2023_01_02_064757) do
     t.index ["uid"], name: "index_users_on_uid", unique: true
   end
 
+  add_foreign_key "bookmarks", "qiita_articles"
+  add_foreign_key "bookmarks", "users"
+  add_foreign_key "qiita_article_likes", "qiita_articles"
+  add_foreign_key "qiita_article_likes", "users"
   add_foreign_key "qiita_category_maps", "categories"
   add_foreign_key "qiita_category_maps", "qiita_articles"
 end

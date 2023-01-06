@@ -20,6 +20,8 @@
 class QiitaArticle < ApplicationRecord
   has_many :qiita_category_maps, dependent: :destroy
   has_many :categories, through: :qiita_category_maps, dependent: :destroy
+  has_many :bookmarks, dependent: :destroy
+  has_many :qiita_article_likes, dependent: :destroy
 
   scope :popular, -> { where("stock > ?", 100).order(stock: :desc) }
   scope :recent, -> { order(date: :desc) }

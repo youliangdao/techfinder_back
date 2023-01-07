@@ -6,9 +6,11 @@ Rails.application.routes.draw do
       resources :hello, only: %w[index]
       
       resource :image, only: %w[create show]
+      get 'images/:user_id', to: 'images#avatar'
       resource :authentication, only: %w[create]
       resource :profile, only: %w[show update]
       resources :articles, only: %w[index] do
+        resources :comments, only: %w[index create destroy update], shallow: true
         collection do
           get 'rising', to: 'articles#rising'
           get 'bookmarks', to: 'articles#bookmarks'

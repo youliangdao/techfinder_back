@@ -11,6 +11,8 @@ Rails.application.routes.draw do
       resource :profile, only: %w[show update]
       resources :articles, only: %w[index] do
         resources :comments, only: %w[index create destroy update], shallow: true
+        resources :qiita_article_likes, only: %w[index]
+        resources :bookmarks, only: %w[index]
         collection do
           get 'rising', to: 'articles#rising'
           get 'bookmarks', to: 'articles#bookmarks'

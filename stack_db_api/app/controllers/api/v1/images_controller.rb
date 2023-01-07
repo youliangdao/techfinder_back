@@ -23,7 +23,7 @@ class Api::V1::ImagesController < Api::V1::BaseController
   end
 
   def file_url(avatar_key)
-    url = Aws::S3::Object.new(ENV['S3_BUCKET_NAME'], avatar_key).public_url    
+    Aws::S3::Object.new(ENV['S3_BUCKET_NAME'], avatar_key).public_url    
   end
 
 end

@@ -18,6 +18,7 @@
 #
 class User < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
+  has_many :comments, dependent: :destroy
   has_many :bookmark_qiita_articles, through: :bookmarks, source: :qiita_article
   has_many :qiita_article_likes, dependent: :destroy
   has_many :like_qiita_articles, through: :qiita_article_likes, source: :qiita_article
@@ -31,6 +32,10 @@ class User < ApplicationRecord
     return user if user
 
     User.create!(uid: user_info[:uid], nickname: "User_#{user_info[:uid]}")
+  end
+
+  def own?(object)
+    id == object.user_id
   end
 
   def bookmark(qiita_article)

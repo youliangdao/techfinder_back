@@ -2,9 +2,6 @@ Rails.application.routes.draw do
   root  'rails/welcome#index'
   namespace :api, format: "json" do
     namespace :v1 do
-      # api test action
-      resources :hello, only: %w[index]
-      
       resource :image, only: %w[create show]
       get 'images/:user_id', to: 'images#avatar'
       resource :authentication, only: %w[create]

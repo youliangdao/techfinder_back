@@ -1538,7 +1538,7 @@ zenn_data = [
   
 ]
 
-zenn_data.each_with_index do |article|
+zenn_data.each do |article|
   image = LinkThumbnailer.generate("#{article[:link]}").images.first.src.to_s 
   Article.seed do |s|
     s.id = article[:id]

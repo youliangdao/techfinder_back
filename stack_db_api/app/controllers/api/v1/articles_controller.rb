@@ -3,34 +3,37 @@ class Api::V1::ArticlesController < Api::V1::BaseController
 
   def index
     if params[:tab] == "popular"
-      qiita_articles = QiitaArticle.popular
+      articles = Article.popular
     else
-      qiita_articles = QiitaArticle.all
+      articles = Article.all.recent
     end
-    json_string = QiitaArticleSerializer.new(qiita_articles, options).serializable_hash.to_json
+    json_string = ArticleSerializer.new(articles, options).serializable_hash.to_json
     render json: json_string
   end
 
   def rising
-    qiita_articles = QiitaArticle.where("stock > ?", 100).recent.limit(10)
-    json_string = QiitaArticleSerializer.new(qiita_articles, options).serializable_hash.to_json
+    qiita_articles = Article.where(media_name: "qiita.com").where("stock > ?", 100).recent.limit(5)
+    zenn_articles = Article.where(media_name: "zenn.dev").where("stock > ?", 100).recent.limit(5)
+    articles = qiita_articles | zenn_articles
+    
+    json_string = ArticleSerializer.new(articles, options).serializable_hash.to_json
     render json: json_string
   end
 
   def bookmarks
-    json_string = QiitaArticleSerializer.new(current_user.bookmark_qiita_articles, options).serializable_hash.to_json
+    json_string = ArticleSerializer.new(current_user.bookmark_articles, options).serializable_hash.to_json
     render json: json_string
   end
 
   def likes
-    json_string = QiitaArticleSerializer.new(current_user.like_qiita_articles, options).serializable_hash.to_json
+    json_string = ArticleSerializer.new(current_user.like_articles, options).serializable_hash.to_json
     render json: json_string
   end
 
   def bookmark_likes
-    qiita_bookmark_or_like_articles = current_user.bookmark_qiita_articles | current_user.like_qiita_articles
-    qiita_bookmark_like_articles = QiitaArticle.where(id: qiita_bookmark_or_like_articles.map(&:id))
-    json_string = QiitaArticleSerializer.new(qiita_bookmark_like_articles, options).serializable_hash.to_json
+    bookmark_or_like_articles = current_user.bookmark_articles | current_user.like_articles
+    bookmark_like_articles = Article.where(id: bookmark_or_like_articles.map(&:id))
+    json_string = ArticleSerializer.new(bookmark_like_articles, options).serializable_hash.to_json
     render json: json_string
   end
 
@@ -38,7 +41,6 @@ class Api::V1::ArticlesController < Api::V1::BaseController
 
   def options
     options = {}
-    options[:meta] = { media: { name: "qiita.com", image: "https://youliangdao.s3.ap-northeast-1.amazonaws.com/favicon.png" } }
     options[:include] = [:categories]
     options
   end

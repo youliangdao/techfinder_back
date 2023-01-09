@@ -15,8 +15,8 @@
 #  index_categories_on_path  (path) UNIQUE
 #
 class Category < ApplicationRecord
-  has_many :qiita_category_maps, dependent: :destroy
-  has_many :qiita_articles, through: :qiita_category_maps, dependent: :destroy
+  has_many :category_maps, dependent: :destroy
+  has_many :articles, through: :category_maps, dependent: :destroy
 
   validates :name,  presence: true, uniqueness: true
   validates :image, presence: true

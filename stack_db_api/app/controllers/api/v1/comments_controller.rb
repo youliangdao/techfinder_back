@@ -2,8 +2,8 @@ class Api::V1::CommentsController < Api::V1::BaseController
   skip_before_action :authenticate, only: %w[index]
 
   def index
-    qiita_article = QiitaArticle.find(params[:article_id])
-    comments = qiita_article.comments
+    article = Article.find(params[:article_id])
+    comments = article.comments
     json_string = CommentSerializer.new(comments, options).serializable_hash.to_json
     render json: json_string
   end
@@ -37,7 +37,7 @@ class Api::V1::CommentsController < Api::V1::BaseController
   private
 
   def comment_params
-    params.require(:comment).permit(:body).merge(qiita_article_id: params[:article_id])
+    params.require(:comment).permit(:body).merge(article_id: params[:article_id])
   end
 
   def update_comment_params

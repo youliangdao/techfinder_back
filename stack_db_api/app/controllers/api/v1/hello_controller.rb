@@ -1,43 +1,29 @@
 class Api::V1::HelloController < ApplicationController
   def index
-    qiita_items_page1 = QiitaApiClient.get_items(1)
-    qiita_items_page2 = QiitaApiClient.get_items(2)
-    qiita_items_page3 = QiitaApiClient.get_items(3)
-    qiita_items = []
-    qiita_items.concat(qiita_items_page1, qiita_items_page2, qiita_items_page3)
-
-    # tags = qiita_items.map do |item|
-    #   item["tags"].map { |tag| tag["name"] }
-    # end
-
-    qiita_items.each_with_index do |item, _i|
-      array = []
-      item["tags"].each do |tag|
-        tag_name = tag["name"]
-        categories = Category.arel_table
-        if tag_name == "Go"
-          category = Category.where(categories[:name].matches("#{tag_name}"))
-        else
-          category = Category.where(categories[:name].matches("%#{tag_name}%"))
-        end
-
-
-        if category.length == 0
-          array.push(64)
-        else
-          array.push(category[0].id)
-        end
-      end
-
-      array.uniq!
-
-      if array.length > 1
-        array.delete(64)
-      end
-      puts array
+    zenn_data = [
+      {
+        link: "https://zenn.dev/wheatandcat/articles/20220503-memoir",
+        title: "【夫婦で開発】1年かけて1週間を振り返えるアプリを本気で開発してみた",
+        date: "2022-05-04",
+        stock: 2460,
+      },
+      {
+        link: "https://zenn.dev/ryohey/articles/6da216dc43557a",
+        title: "5年かけて作ったウェブアプリを Hacker News に投稿し、最初の1ドルを得た話",
+        date: "2022-02-12",
+        stock: 1850,
+      },
+      {
+        link: "https://zenn.dev/karugamo/articles/bb7477d1e7a648",
+        title: "はじめてのReactで都道府県を当てるゲームをつくりました",
+        date: "2022-09-28",
+        stock: 1685,
+      },
+    ]
+    zenn_articles = zenn_data.map do |data|
+      data[:image] = LinkThumbnailer.generate("#{data[:link]}").images.first.src.to_s 
+      data
     end
 
-
-    render json: {status: :ok}
   end
 end

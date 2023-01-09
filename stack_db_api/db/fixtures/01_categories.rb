@@ -63,5 +63,14 @@ Category.seed(
   { id: 62, name: "three.js", path: "threejs", image: "https://s3-ap-northeast-1.amazonaws.com/qiita-tag-image/c81fc4d911ce0aa109390036e64abdf4536a7e8a/large.jpg?1562913826" },
   { id: 63, name: "Stripe", path: "stripe", image: "https://s3-ap-northeast-1.amazonaws.com/qiita-tag-image/7ea1e58a40ac13208ade8e84c54752ac0fbea5fd/large.jpg?1513499483" },
   { id: 64, name: "その他", path: "others", image: "https://youliangdao.s3.ap-northeast-1.amazonaws.com/sharp-1.jpg" },
-  { id: 65, name: "LINEBot", path: "linebot", image: "https://s3-ap-northeast-1.amazonaws.com/qiita-tag-image/2d069cfad054607af71c2d833d744fbd582be08f/large.jpg?1460208330"}
+  { id: 65, name: "LINEBot", path: "linebot", image: "https://s3-ap-northeast-1.amazonaws.com/qiita-tag-image/2d069cfad054607af71c2d833d744fbd582be08f/large.jpg?1460208330"},
+  { id: 66, name: "Supabase", path: "supabase", image: "https://s3-ap-northeast-1.amazonaws.com/qiita-tag-image/35b53670e1ec4f2cafda921befcb1154569dfead/large.jpg?1629183669" },
+  { id: 67, name: "Cloudflare", path: "cloudflare", image: "https://s3-ap-northeast-1.amazonaws.com/qiita-tag-image/d8843ad74163e126da38918ca212c7bd0a868a76/large.jpg?1477637312" },
+  { id: 68, name: "Rust", path: "rust", image: "https://s3-ap-northeast-1.amazonaws.com/qiita-tag-image/4d6e609b82b6d094a88dc4183810f8c4e8e7cd05/large.jpg?1514023966" },
+  { id: 69, name: "WebAssembly", path: "wasm", image: "https://s3-ap-northeast-1.amazonaws.com/qiita-tag-image/39b7cd092ca79a7ff89bd11c5d51179e0fb0889a/large.jpg?1506516600" },
+  { id: 70, name: "Auth0", path: "auth0", image: "https://s3-ap-northeast-1.amazonaws.com/qiita-tag-image/75504067c78c3d19ac3ac40e7dac26efd7c0d8d5/large.jpg?1489412578" },
+  { id: 71, name: "Prisma", path: "prisma", image: "https://s3-ap-northeast-1.amazonaws.com/qiita-tag-image/b49008d69872bc9ee5422ed1661b1a37d9d7dce3/large.jpg?1529334693" },
+  { id: 72, name: "Svelte", path: "svelte", image: "https://s3-ap-northeast-1.amazonaws.com/qiita-tag-image/5e55c7647d6e03bada17540307e1d07e22e1eb90/large.jpg?1558405328" },
+  { id: 73, name: "HTML", path: "html", image: "https://s3-ap-northeast-1.amazonaws.com/qiita-tag-image/f3a4df3542fcd0d1a603e6a800780ece3b28f062/large.jpg?1490806921" },
+  { id: 74, name: "Slack", path: "slack", image: "https://s3-ap-northeast-1.amazonaws.com/qiita-tag-image/448422f3f4825f9062d02f10fa7e542d37a0c658/large.jpg?1547787899" }
 )

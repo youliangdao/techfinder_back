@@ -19,9 +19,9 @@
 class User < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
   has_many :comments, dependent: :destroy
-  has_many :bookmark_qiita_articles, through: :bookmarks, source: :qiita_article
-  has_many :qiita_article_likes, dependent: :destroy
-  has_many :like_qiita_articles, through: :qiita_article_likes, source: :qiita_article
+  has_many :bookmark_articles, through: :bookmarks, source: :article
+  has_many :likes, dependent: :destroy
+  has_many :like_articles, through: :likes, source: :article
   
   validates :nickname,    presence: true, length: { maximum: 40 }
   validates :uid,         presence: true, uniqueness: true
@@ -38,20 +38,20 @@ class User < ApplicationRecord
     id == object.user_id
   end
 
-  def bookmark(qiita_article)
-    bookmark_qiita_articles << qiita_article
+  def bookmark(article)
+    bookmark_articles << article
   end
 
-  def unbookmark(qiita_article)
-    bookmark_qiita_articles.destroy(qiita_article)
+  def unbookmark(article)
+    bookmark_articles.destroy(article)
   end
 
-  def like(qiita_article)
-    like_qiita_articles << qiita_article
+  def like(article)
+    like_articles << article
   end
 
-  def unlike(qiita_article)
-    like_qiita_articles.destroy(qiita_article)
+  def unlike(article)
+    like_articles.destroy(article)
   end
 
 end

@@ -14,7 +14,8 @@ Rails.application.routes.draw do
           get 'rising', to: 'articles#rising'
           get 'bookmarks', to: 'articles#bookmarks'
           get 'likes', to: 'articles#likes'
-          get 'bookmarks_and_likes', to: 'articles#bookmark_likes'
+          get 'comments', to: 'articles#comments'
+          get 'bookmarks_and_comments', to: 'articles#bookmark_comments'
         end
       end
       scope '/:category_name' do

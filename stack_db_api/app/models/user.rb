@@ -18,10 +18,11 @@
 #
 class User < ApplicationRecord
   has_many :bookmarks, dependent: :destroy
-  has_many :comments, dependent: :destroy
   has_many :bookmark_articles, through: :bookmarks, source: :article
   has_many :likes, dependent: :destroy
   has_many :like_articles, through: :likes, source: :article
+  has_many :comments, dependent: :destroy
+  has_many :comment_articles, through: :comments, source: :article
   
   validates :nickname,    presence: true, length: { maximum: 40 }
   validates :uid,         presence: true, uniqueness: true

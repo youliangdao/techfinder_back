@@ -30,10 +30,15 @@ class Api::V1::ArticlesController < Api::V1::BaseController
     render json: json_string
   end
 
-  def bookmark_likes
-    bookmark_or_like_articles = current_user.bookmark_articles | current_user.like_articles
-    bookmark_like_articles = Article.where(id: bookmark_or_like_articles.map(&:id))
-    json_string = ArticleSerializer.new(bookmark_like_articles, options).serializable_hash.to_json
+  def comments
+    json_string = ArticleSerializer.new(current_user.comment_articles, options).serializable_hash.to_json
+    render json: json_string
+  end
+
+  def bookmark_comments
+    bookmark_or_comment_articles = current_user.bookmark_articles | current_user.comment_articles
+    bookmark_comment_articles = Article.where(id: bookmark_or_comment_articles.map(&:id))
+    json_string = ArticleSerializer.new(bookmark_comment_articles, options).serializable_hash.to_json
     render json: json_string
   end
 

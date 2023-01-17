@@ -9,7 +9,8 @@ class Api::V1::BookmarksController < Api::V1::BaseController
   def create
     article = Article.find(params[:article_id])
     current_user.bookmark(article)
-    render json: {status: :ok, message: "Bookmark successfuly created!"}
+    json_string = ArticleSerializer.new(article, options).serializable_hash.to_json
+    render json: json_string
   end
 
   def destroy
@@ -17,4 +18,12 @@ class Api::V1::BookmarksController < Api::V1::BaseController
     current_user.unbookmark(article)
     render json: { status: :ok }
   end
+
+  private
+
+  def options
+    options = {}
+    options[:include] = [:categories]
+    options
+  end  
 end

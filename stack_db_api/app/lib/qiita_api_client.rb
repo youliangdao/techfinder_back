@@ -15,6 +15,19 @@ class QiitaApiClient
       end
     end
 
+    def seed(page)
+      response = connection.get('/api/v2/items') do |req|
+        req.params[:per_page] = 100
+        req.params[:page] = page
+        req.params[:query] = "title:個人開発 stocks:>50 created:>2020-01-01 created:<2023-01-02 OR title:ポートフォリオ stocks:>50 created:>2020-01-01 created:<2023-01-02 OR tag:個人開発 stocks:>50 created:>2020-01-01 created:<2023-01-02 OR tag:ポートフォリオ stocks:>50 created:>2020-01-01 created:<2023-01-02"
+      end
+      if response.success?
+        response.body
+      else
+        raise QiitaApiClient::HTTPError.new(response)
+      end      
+    end
+
     def get_items(page)
       response = connection.get('/api/v2/items') do |req|
         req.params[:per_page] = 100
@@ -26,6 +39,7 @@ class QiitaApiClient
       else
         raise QiitaApiClient::HTTPError.new(response)
       end
-    end
+    end 
+
   end
 end

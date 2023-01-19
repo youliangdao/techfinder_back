@@ -1,8 +1,10 @@
-qiita_items_page1 = QiitaApiClient.get_items(1)
-qiita_items_page2 = QiitaApiClient.get_items(2)
-qiita_items_page3 = QiitaApiClient.get_items(3)
+page = 1
 qiita_items = []
-qiita_items.concat(qiita_items_page1, qiita_items_page2, qiita_items_page3)
+
+while QiitaApiClient.seed(page).length > 0
+  qiita_items.concat(QiitaApiClient.seed(page))
+  page += 1
+end
 
 # Qiita記事の初期データ
 qiita_items.each_with_index do |article, i|
@@ -20,27 +22,40 @@ qiita_items.each_with_index do |article, i|
     s.image = image
   end
 
-  array = []
+  category_ids = []
   article["tags"].each do |tag|
     tag_name = tag["name"]
     categories = Category.arel_table
-    if tag_name == "Go" || tag_name == "Web"
-      category = Category.where(categories[:name].matches("#{tag_name}"))
-    else
+
+    case tag_name
+    when "Nuxt", "デザイン", "Design"
       category = Category.where(categories[:name].matches("%#{tag_name}%"))
-    end
-    if category.length == 0
-      array.push(64)
+    when "chrome-extension"
+      category = Category.where(name: "Chrome拡張")
+    when "ゲーム制作"
+      category = Category.where(name: "ゲーム")
+    when "linebot"
+      category = Category.where(name: "LINE")
+    when "SvelteKit"
+      category = Category.where(name: "Svelte")
+    when "リーンスタートアップ"
+      category = Category.where(name: "スタートアップ")
     else
-      array.push(category[0].id)
+      category = Category.where(categories[:name].matches("#{tag_name}"))
+    end
+
+    if category.length == 0
+      category_ids.push(64)
+    else
+      category_ids.push(category[0].id)
     end
   end
-  array.uniq!  
-  if array.length > 1
-    array.delete(64)
+  category_ids.uniq!  
+  if category_ids.length > 1
+    category_ids.delete(64)
   end
     
-  array.each do |category_id|
+  category_ids.each do |category_id|
     CategoryMap.create(article_id: i + 1, category_id: category_id)
   end
   
@@ -63,6 +78,7 @@ bigger_than_100 = 3
 bigger_than_50 = 3
 bigger_than_20 = 3.5
 bigger_than_10 = 4
+
 
 zenn_data = [
   {

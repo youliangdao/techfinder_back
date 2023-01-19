@@ -32,12 +32,10 @@ namespace :zenn do
             good = good * 4.5
           when 300..399
             good = good * 4
-          when 200..299
+          when 200..299, 20..49
             good = good * 3.5
           when 50..199
             good = good * 3
-          when 20..49
-            good = good * 3.5
           when 10..19
             good = good * 5
           end

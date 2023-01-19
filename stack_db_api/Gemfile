@@ -20,6 +20,10 @@ gem 'faraday'
 gem 'faraday_middleware'
 # OGP画像取得
 gem 'link_thumbnailer'
+# scraping
+gem 'nokogiri'
+# 定期実行
+gem 'whenever'
 
 group :development, :test do
   # デバッグ用

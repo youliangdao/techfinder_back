@@ -15,7 +15,7 @@ namespace :zenn do
       url = "https://zenn.dev/topics/%E5%80%8B%E4%BA%BA%E9%96%8B%E7%99%BA?order=alltime&page=#{page}"
       # urlにアクセスしてhtmlを取得する
       # html = URI.open("#{Rails.root}/app/views/nokogiri_practice.html").read
-      html = URI.open(url).read
+      html = URI.parse(url).open.read
       doc = Nokogiri::HTML.parse(html)
   
       # 1ページ内の記事情報を取得
@@ -61,7 +61,7 @@ namespace :zenn do
             
             sleep 1
             category_ids = []
-            html_child = URI.open(link_url)
+            html_child = URI.parse(link_url).open
             doc_child = Nokogiri::HTML.parse(html_child)
             doc_child.css(".View_topicName__rxKth").each do |topic|
               categories = Category.arel_table

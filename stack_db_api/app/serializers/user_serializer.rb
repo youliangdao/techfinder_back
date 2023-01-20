@@ -18,5 +18,5 @@
 #
 class UserSerializer
   include JSONAPI::Serializer
-  attributes :nickname, :description, :avatar_key
+  attributes :nickname, :description, :avatar_key, :twitter_username, :github_username, :uid
 end

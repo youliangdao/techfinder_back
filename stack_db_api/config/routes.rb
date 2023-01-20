@@ -6,6 +6,12 @@ Rails.application.routes.draw do
       get 'images/:user_id', to: 'images#avatar'
       resource :authentication, only: %w[create]
       resource :profile, only: %w[show update]
+      resources :users, only: %w[show] do
+        collection do
+          get ':user_id/likes', to: 'users#likes'
+          get ':user_id/comments', to: 'users#comments'
+        end
+      end
       resources :articles, only: %w[index] do
         resources :comments, only: %w[index create destroy update], shallow: true
         resources :likes, only: %w[index]

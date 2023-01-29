@@ -32,7 +32,7 @@ class QiitaApiClient
       response = connection.get('/api/v2/items') do |req|
         req.params[:per_page] = 100
         req.params[:page] = page
-        req.params[:query] = "title:個人開発 stocks:>50 created:>2020-01-01 OR title:ポートフォリオ stocks:>50 created:>2020-01-01 OR tag:個人開発 stocks:>50 created:>2020-01-01 OR tag:ポートフォリオ stocks:>50 created:>2020-01-01"
+        req.params[:query] = "title:個人開発 stocks:>50 OR title:ポートフォリオ stocks:>50 OR tag:個人開発 stocks:>50 OR tag:ポートフォリオ stocks:>50"
       end
       if response.success?
         response.body

@@ -27,6 +27,11 @@ Rails.application.routes.draw do
       scope '/:category_name' do
         get 'articles', to: 'category/articles#index'
       end
+      resources :genres, only: %w[index] do
+        collection do
+          get '/:genre_name/articles', to: 'genre/articles#index'
+        end
+      end
       resources :categories, only: %w[index] do
         collection do
           get 'popular', to: 'categories#popular'

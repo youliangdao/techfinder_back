@@ -34,7 +34,7 @@ class Article < ApplicationRecord
   validates :stock,   presence: true
 
   def self.genre(genre_name)
-    articles = case genre_name
+    case genre_name
     when "beginner"
       links = [
         "https://qiita.com/terubooon/items/08c145aac0dd10ea8cbc",

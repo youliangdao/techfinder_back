@@ -12,9 +12,7 @@ class Api::V1::ArticlesController < Api::V1::BaseController
   end
 
   def rising
-    qiita_articles = Article.where(media_name: "qiita.com").where("stock > ?", 100).recent.limit(5)
-    zenn_articles = Article.where(media_name: "zenn.dev").where("stock > ?", 100).recent.limit(5)
-    articles = qiita_articles | zenn_articles
+    articles = Article.where("stock > ?", 100).recent.limit(10)
     
     json_string = ArticleSerializer.new(articles, options).serializable_hash.to_json
     render json: json_string

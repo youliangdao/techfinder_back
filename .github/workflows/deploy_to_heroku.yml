@@ -21,11 +21,11 @@ jobs:
         with:
           ruby-version: "3.0.4"
       - name: Docker build
-        working-directory: ./stack_db_api
+        working-directory: ./api
         run: docker login --username=$USERNAME --password=$HEROKU_API_KEY registry.heroku.com
 
       - name: Publish
-        working-directory: ./stack_db_api
+        working-directory: ./api
         run: |
           docker build -t registry.heroku.com/$APP_NAME/web -f Dockerfile.prod .
           docker push registry.heroku.com/$APP_NAME/web
